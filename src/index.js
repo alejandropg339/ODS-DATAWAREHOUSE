@@ -1,17 +1,8 @@
-// const csv = require('csv-parser');
-// const fs = require('fs');
-// const path = require('path');
-// const result = [];
+const { readFileCsv } = require("./controller/dim_gpu_prod.js");
+const cron = require("node-cron");
 
-// const filename = path.join(__dirname, '/csvs/DIM_GPU_PROD.csv');
+//Call each Hour
+cron.schedule("0 0 */1 * * *", readFileCsv);
 
-// fs.createReadStream(filename)
-//   .pipe(csv())
-//   .on('data', (data) => result.push(data))
-//   .on('end', () => {
-//     console.log(result);
-//   });
-
-const {readFileCsv} = require('./controller/dim_gpu_prod.js');
-
-readFileCsv();
+//Call job each two minutes
+// cron.schedule("0 */2 * * * *", readFileCsv);
